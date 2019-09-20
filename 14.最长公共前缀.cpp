@@ -11,14 +11,14 @@ public:
         if (size == 0)
             return "";
         if (size == 1)
-            return strs[0];
-        while(true) {
+            return strs.at(0);
+        while (true) {
             for (int i = 0; i < size; ++i) {
-                if (j >= strs[i].size())
-                    return strs[i].substr(0, j);
-                char c = strs[0][j];
-                if (strs[i][j] != c)
-                    return strs[i].substr(0, j);
+                if (j >= strs.at(i).size())
+                    return strs.at(i).substr(0, j);
+                char c = strs.at(0).at(j);
+                if (c != strs.at(i).at(j))
+                    return strs.at(i).substr(0, j);
             }
             ++j;
         }
