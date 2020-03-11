@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=94 lang=cpp
+ * @lc app=leetcode.cn id=144 lang=cpp
  *
- * [94] 二叉树的中序遍历
+ * [144] 二叉树的前序遍历
  */
 
 // @lc code=start
@@ -16,18 +16,18 @@
  */
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> preorderTraversal(TreeNode* root) {
         vector<int> ans;
-        inOrder(root, ans);
+        preOrder(root, ans);
         return ans;
     }
-    void inOrder(TreeNode* root, vector<int> &ans) {
+    void preOrder(TreeNode* root, vector<int> &ans) {
         if (root == NULL) {
             return;
         }
-        inOrder(root->left, ans);
         ans.push_back(root->val);
-        inOrder(root->right, ans);
+        preOrder(root->left, ans);
+        preOrder(root->right, ans);
     }
 };
 // @lc code=end
