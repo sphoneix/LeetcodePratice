@@ -17,17 +17,20 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> ans;
-        inOrder(root, ans);
-        return ans;
-    }
-    void inOrder(TreeNode* root, vector<int> &ans) {
-        if (root == NULL) {
-            return;
+        vector<int> inorderNumbers;
+        TreeNode* p = root;
+        stack<TreeNode* > stk;
+        while (p || stk.size()) {
+            while (p) {
+                stk.push(p);
+                p = p->left;
+            }
+            p = stk.top();
+            stk.pop();
+            inorderNumbers.push_back(p->val);
+            p = p->right;
         }
-        inOrder(root->left, ans);
-        ans.push_back(root->val);
-        inOrder(root->right, ans);
+        return inorderNumbers;
     }
 };
 // @lc code=end
