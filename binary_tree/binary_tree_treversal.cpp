@@ -15,7 +15,7 @@ struct TreeNode {
 
 class PreOrder {
 public:
-    vector<int> preOrderTraversalByIteration(TreeNode* root)
+    vector<int> PreOrderTraversalByIteration(TreeNode* root)
     {
         stack<TreeNode* > stackOfNode;
         vector<int> ans;
@@ -36,20 +36,58 @@ public:
         }
         return ans;
     }
-    vector<int> preOrderTraversalByRecursion(TreeNode* root)
+    vector<int> PreOrderTraversalByRecursion(TreeNode* root)
     {
         vector<int> ans;
-        preOrder(root, ans);
+        PreOrderRecursive(root, ans);
         return ans;
     }
 private:
-    void preOrder(TreeNode* root, vector<int>& ans)
+    void PreOrderRecursive(TreeNode* root, vector<int>& ans)
     {
         if (root == NULL) {
             return;
         }
         ans.push_back(root->val);
-        preOrder(root->left, ans);
-        preOrder(root->right, ans);
+        PreOrderRecursive(root->left, ans);
+        PreOrderRecursive(root->right, ans);
     }
-}
+};
+
+class InOrder {
+public:
+    vector<int> InOrderTraversalByIteration(TreeNode* root)
+    {
+        stack<TreeNode* > treeNodes;
+        vector<int> ans;
+        TreeNode* temp = root;
+        while (temp || treeNodes.size()) {
+            while (temp) {
+                treeNodes.push(temp);
+                temp = temp->left;
+            }
+            temp = treeNodes.top();
+            treeNodes.pop();
+            ans.push_back(temp->val);
+            temp = temp->right;
+        }
+        return ans;
+    }
+
+    vector<int> InOrderTraversalByRecursion(TreeNode* root)
+    {
+        vector<int> ans;
+        InOrderRecursive(root, ans);
+        return ans;
+    }
+private:
+    void InOrderRecursive(TreeNode* root, vector<int>& ans)
+    {
+        if (root == NULL) {
+            return;
+        }
+        InOrderRecursive(root->left, ans);
+        ans.push_back(root->val);
+        InOrderRecursive(root->right, ans);
+    }
+};
